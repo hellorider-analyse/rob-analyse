@@ -170,27 +170,38 @@ if run:
     # --------------------------------------------------------------------------- #
         
     from io import BytesIO
-
-    # 3.  Eén keer schrijven: direct naar BytesIO
+    
+    # … je analyse-code hierboven …
+    
     output = BytesIO()
+    
+    # 1) Schrijf met xlsxwriter + constant_memory
     with st.spinner("Output wordt gegenereerd..."):
-        with pd.ExcelWriter(output, engine="openpyxl") as xl:
+        with pd.ExcelWriter(
+            output,
+            engine="xlsxwriter"
+        ) as xl:
             df.to_excel(xl,              sheet_name="AFAS data",          index=False)
             metabase.to_excel(xl,        sheet_name="Metabase data",      index=False)
             combined.to_excel(xl,        sheet_name="Alle AFAS‑Metabase", index=False)
             only_AFAS.to_excel(xl,       sheet_name="Wel AFAS",           index=False)
             only_Metabase.to_excel(xl,   sheet_name="Wel Metabase",       index=False)
             AFAS_Metabase.to_excel(xl,   sheet_name="Verschillen",        index=False)
-
-    output.seek(0)  # rewind
-
+    
+    # 2) Rewind en haal ruwe bytes op
+    output.seek(0)
+    bytes_data = output.getvalue()
+    
+    # 3) Download‑knop
     st.download_button(
-        label="Download resultaat-Excel",
-        data=output,
+        label="Download resultaat‑Excel",
+        data=bytes_data,   # <-- niet het BytesIO‑object zelf
         file_name="ROB_analyse.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
-    st.success("✅  Analyse voltooid – bestand klaar voor download.")
+    
+    st.success("✅ Analyse voltooid – bestand klaar voor download.")
+
 
 
 
