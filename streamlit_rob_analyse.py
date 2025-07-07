@@ -5,9 +5,10 @@ Created on Mon Jul  7 15:42:35 2025
 @author: MijkePietersma
 """
 
+import re
 import streamlit as st
 import pandas as pd
-import re
+
 
 st.title("ROB‑analyse")
 
@@ -190,8 +191,7 @@ if run:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
     st.success("✅  Analyse voltooid – bestand klaar voor download.")
-else:
-    st.info("Er is iets misgegaan...")
+
 
 
 
