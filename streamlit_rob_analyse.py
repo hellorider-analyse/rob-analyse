@@ -184,9 +184,9 @@ if run:
             df.to_excel(xl,              sheet_name="AFAS data",          index=False)
             metabase.to_excel(xl,        sheet_name="Metabase data",      index=False)
             combined.to_excel(xl,        sheet_name="Alle AFAS‑Metabase", index=False)
-            only_AFAS.to_excel(xl,       sheet_name="Wel AFAS",           index=False)
-            only_Metabase.to_excel(xl,   sheet_name="Wel Metabase",       index=False)
-            AFAS_Metabase.to_excel(xl,   sheet_name="Verschillen",        index=False)
+            only_AFAS.to_excel(xl,       sheet_name="Wel AFAS Geen Metabase",           index=False)
+            only_Metabase.to_excel(xl,   sheet_name="Wel Metabase Geen AFAS",       index=False)
+            AFAS_Metabase.to_excel(xl,   sheet_name="Verschillen AFAS-Metabase",        index=False)
     
     # 2) Rewind en haal ruwe bytes op
     output.seek(0)
